@@ -1,0 +1,63 @@
+.header{
+    height: 35vw;
+    width: 96+vw;
+    /* margin: 25px auto; */
+    background: url('/header_img.png') no-repeat ;
+    background-size:100vw;
+    /* background-repeat: repeat-y; */
+    position: relative;
+    
+}
+
+.header-contents{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1.5vw;
+    max-width: 60%;
+    bottom: 23%;
+    left: 6vw;
+    animation: fadeIn 3s;
+}
+.header-contents h2{
+    font-weight: 1500px;
+    color: aliceblue;
+    font-size: max(4.6vw,22px);
+}
+
+.header-contents p{
+    color: aliceblue;
+    font-size: 1vw;  
+}
+
+.header-contents button{
+    border: none;
+    color:rgb(30, 139, 30);
+    font-weight: 500;
+    padding: 1vw;
+    background-color: aliceblue;
+    font-size: max(1vw ,13px);
+    border-radius: 50px;
+}
+
+@media (max-width:1050){
+   
+    .header-contents{
+        max-width: 45%;
+    }
+
+}
+@media (max-width:750){
+    .header-contents{
+        max-width: 55%;
+    }
+    .header-contents p{
+        display: none;
+    }
+
+    .header-contents button {
+        padding: 2vw 4vw;
+    }
+
+}

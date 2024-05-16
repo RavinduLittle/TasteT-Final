@@ -1,0 +1,56 @@
+.order-summary {
+  border: 1px solid #eaeaea;
+  padding: 20px;
+  max-width: 1600px;
+  /* margin: 0 auto; */
+}
+
+.heade {
+  text-align: center;
+}
+
+.heade h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.user-details {
+  margin-top: 20px;
+}
+
+.user-details h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.ordered-items {
+  margin-top: 20px;
+}
+
+.ordered-items h3 {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+.item-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.item-table th, .item-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: left;
+}
+
+.item-image {
+  width: 1px;
+ 
+}
+
+.total-amount {
+  margin-top: 20px;
+  text-align: right;
+  font-weight: bold;
+}

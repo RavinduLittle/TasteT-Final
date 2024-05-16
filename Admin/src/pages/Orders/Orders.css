@@ -1,0 +1,87 @@
+.order_item {
+    display: grid;
+    grid-template-columns: 0.5fr 1fr 1fr 1fr 1fr;
+    align-items: start;
+    gap: 30px;
+    border: 1px solid #326c5a;
+    padding: 20px;
+    margin: 30px 0px;
+    font-size: 14px;
+    color: rgba(4, 14, 24, 0.562);
+}
+
+.order-item-food,
+.order-item-name {
+    font-weight: 600;
+}
+
+.order-item-name {
+    margin-top: 30px;
+    margin-bottom: 5px;
+}
+
+.order-item-address {
+    margin-bottom: 10px;
+}
+
+.order_item select {
+    background-color: #ffffff;
+    border: 1px solid #326c5a;
+    width: max(10vw, 120px);
+    padding: 10px;
+    outline: none;
+    border-radius: 5px;
+}
+
+@media (max-width: 1000px) {
+    .order_item {
+        font-size: 12px;
+        grid-template-columns: 0.5fr 2fr 1fr;
+        padding: 15px 8px;
+    }
+
+    .order_item select {
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    .order_item img {
+        width: 40px;
+    }
+}
+
+/* New updates */
+.order {
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+.order h3 {
+    color: #326c5a;
+    margin-bottom: 20px;
+}
+
+.order-filter {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+.order-filter label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.order-filter input {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.order-count {
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #326c5a;
+}
