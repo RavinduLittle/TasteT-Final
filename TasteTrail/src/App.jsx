@@ -8,6 +8,7 @@ import LoginAcc from './component/LoginAcc/LoginAcc'
 import PlOrder from './pages/PlOrder/PlOrder'
 import Verify from './pages/Verify/Verify'
 import Morder from './pages/Morder/Morder'
+import AboutUs from './pages/AboutUs/AboutUs'
 
 const App = () => {
 const [showLogin,setShowLogin]=useState(false)
@@ -24,6 +25,7 @@ const [showLogin,setShowLogin]=useState(false)
       <Route path='/order'element={<PlOrder/>}/>
       <Route path='/Verify' element ={<Verify/>}/>
       <Route path='/morder' element={<Morder/>}/>
+      <Route path='/About' element={<AboutUs/>}/>
    
     </Routes>
     </div>

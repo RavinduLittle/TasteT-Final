@@ -1,12 +1,12 @@
-import foodModle from "../models/foodModel.js";
+import foodModel from "../models/foodmodel.js";
 import orderModel from "../models/orderModel.js";
 import fs from "fs";
 
-// add food item
+// Add food item
 const addFood = async (req, res) => {
   let image_filename = `${req.file.filename}`;
 
-  const food = new foodModle({
+  const food = new foodModel({
     name: req.body.name,
     description: req.body.description,
     price: req.body.price,
@@ -18,45 +18,61 @@ const addFood = async (req, res) => {
     await food.save();
     res.json({ success: true, message: "Food added" });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "error.food not add" });
+    console.error("Error adding food:", error);
+    res.status(500).json({ success: false, message: "Error: food not added" });
   }
 };
 
-//all food list
+// List all food items
 const listFood = async (req, res) => {
   try {
-    const foods = await foodModle.find({});
+    const foods = await foodModel.find({});
     res.json({ success: true, data: foods });
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "error" });
+    console.error("Error fetching food list:", error);
+    res.status(500).json({ success: false, message: "Error fetching food list" });
   }
 };
 
-//remove foods item
+// Remove food item
 const removeFood = async (req, res) => {
   try {
-    const food = await foodModle.findById(req.body.id);
-    fs.unlink(`uploads/${food.image}`, () => {});
+    const food = await foodModel.findById(req.body.id);
+    if (food) {
+      fs.unlink(`uploads/${food.image}`, (err) => {
+        if (err) {
+          console.error("Error deleting image file:", err);
+        }
+      });
 
-    await foodModle.findByIdAndDelete(req.body.id); // Changed from res.body.id to req.body.id
-    res.json({ success: true, message: "food removed" });
+      await foodModel.findByIdAndDelete(req.body.id);
+      res.json({ success: true, message: "Food removed" });
+    } else {
+      res.status(404).json({ success: false, message: "Food not found" });
+    }
   } catch (error) {
-    console.log(error);
-    res.json({ success: false, message: "error" });
+    console.error("Error removing food:", error);
+    res.status(500).json({ success: false, message: "Error removing food" });
   }
 };
 
+// Get order details
 const getOrderDetails = async (req, res) => {
   try {
     const orderId = req.params.orderId;
     const order = await orderModel.findById(orderId);
 
+    if (!order) {
+      return res.status(404).json({ success: false, message: "Order not found" });
+    }
+
     // Retrieve food details for each order item
     const itemsWithPrices = await Promise.all(
       order.items.map(async (item) => {
-        const foodItem = await foodModle.findById(item.foodId);
+        const foodItem = await foodModel.findById(item.foodId);
+        if (!foodItem) {
+          throw new Error(`Food item not found for ID: ${item.foodId}`);
+        }
         return {
           ...item.toObject(),
           price: foodItem.price, // Assuming foodItem contains price field
@@ -70,22 +86,25 @@ const getOrderDetails = async (req, res) => {
     });
   } catch (error) {
     console.error("Error fetching order details:", error);
-    res.json({ success: false, message: "Error fetching order details" });
+    res.status(500).json({ success: false, message: "Error fetching order details" });
   }
 };
 
-/* Update food */
-const updatePrice = async (req, res) => {
-  const orderId = req.params.orderId;
-  const { price } = req.body;
+// Update food price
+const updateFoodPrice = async (req, res) => {
   try {
-    // Find the food item by its ID and update the price
-    await foodModle.findByIdAndUpdate(price);
-    res.json({ success: true, message: "Price updated successfully" });
+    const { id, price } = req.body;
+    const food = await foodModel.findById(id);
+    if (!food) {
+      return res.status(404).json({ success: false, message: 'Food not found' });
+    }
+    food.price = price;
+    await food.save();
+    res.json({ success: true, message: 'Price updated successfully' });
   } catch (error) {
-    console.error("Error updating price:", error);
-    res.status(500).json({ success: false, message: "Failed to update price" });
+    console.error('Error updating price:', error);
+    res.status(500).json({ success: false, message: 'Error updating price' });
   }
 };
 
-export { addFood, listFood, removeFood, getOrderDetails, updatePrice };
+export { addFood, listFood, removeFood, getOrderDetails,updateFoodPrice };

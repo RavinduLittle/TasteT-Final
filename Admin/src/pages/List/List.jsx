@@ -46,14 +46,11 @@ const List = ({ url }) => {
   };
 
   const savePrice = async (foodId, newPrice) => {
-    const response = await axios.post(`${url}/api/food/updatePrice`, {
-      id: foodId,
-      price: newPrice,
-    });
+    const response = await axios.put(`${url}/api/food/updatePrice`, { id: foodId, price: newPrice });
     if (response.data.success) {
       toast.success(response.data.message);
     } else {
-      toast.error("Error updating price");
+      toast.error('Error updating price');
     }
   };
 
