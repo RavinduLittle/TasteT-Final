@@ -47,7 +47,12 @@ const Orders = ({ url }) => {
 
   return (
     <div className='order add'>
-      <h3>Order Page</h3>
+      <h3>Order Page</h3><br></br>
+
+      <div className="order-count">
+        <p>Total orders on {selectedDate}:- {filteredOrders.length}</p>
+      </div>
+
       <div className="order-filter">
         <label htmlFor="order-date">Filter by date:</label>
         <input type="date" id="order-date" value={selectedDate} onChange={handleDateChange} />
@@ -82,9 +87,7 @@ const Orders = ({ url }) => {
           </div>
         ))}
       </div>
-      <div className="order-count">
-        <p>Total orders on {selectedDate}: {filteredOrders.length}</p>
-      </div>
+     
     </div>
   );
 };

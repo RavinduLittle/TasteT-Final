@@ -11,38 +11,33 @@ const OrderSummary = ({ orderId, userDetails, items }) => {
         <p>Order ID: {orderId}</p>
       </div>
       <div className="user-details">
-        <h3>User Details:</h3>
-        <p>Name: {userDetails.name}</p>
-        <p>Email: {userDetails.email}</p>
+        <h3>User Details</h3>
+        <div className="details-grid">
+          <div className="details-item">
+            <strong>Name:</strong> {userDetails.name}
+          </div>
+          <div className="details-item">
+            <strong>Email:</strong> {userDetails.email}
+          </div>
+        </div>
       </div>
       <div className="ordered-items">
-        <h3>Ordered Items:</h3>
-        <table className="item-table">
-          <thead>
-            <tr>
-              {/* <th>Item</th> */}
-              <th>Name</th>
-              <th>Quantity</th>
-              <th>Price</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {items.map((item, index) => (
-              <tr key={index}>
-                
-                {/* <td><img src={item.image}  className="item-image" /></td> */}
-                <td>{item.name}</td>
-                <td>{item.quantity}</td>
-                <td>${item.price}</td>
-                <td>${item.price * item.quantity}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <h3>Ordered Items</h3>
+        <div className="items-grid">
+          {items.map((item, index) => (
+            <div className="item-card" key={index}>
+              <div className="item-info">
+                <h4>{item.name}</h4>
+                <p><strong>Quantity:</strong> {item.quantity}</p>
+                <p><strong>Price:</strong> ${item.price}</p>
+                <p><strong>Total:</strong> ${item.price * item.quantity}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
       <div className="total-amount">
-        <p>Total Amount: ${totalAmount}</p>
+        <h3>Total Amount: ${totalAmount}</h3>
       </div>
     </div>
   );

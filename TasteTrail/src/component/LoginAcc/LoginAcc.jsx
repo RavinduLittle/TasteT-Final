@@ -66,7 +66,7 @@ const onLogin = async (event)=>{
           <p>I agree to the terms and privacy policy</p>
         </div>
         {SignupState==="Login"
-        ?<p>Do you haven't Account.Create a Account?<span onClick={()=>setSignupState("Sign Up")}>Click hear</span> </p>
+        ?<p>Don't have an Account.? Create Account Now.<span onClick={()=>setSignupState("Sign Up")}>Sign Up</span> </p>
         : <p>Already have an account? <span onClick={()=>setSignupState("Login")}>Login hear</span></p>
         }
        

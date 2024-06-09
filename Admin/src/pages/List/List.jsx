@@ -82,7 +82,7 @@ const List = ({ url }) => {
                   onChange={(event) => handlePriceChange(event, index)}
                   onBlur={() => {
                     savePrice(item._id, item.price);
-                    handleDoubleClick(index); // Toggle editable state back to false
+                    handleDoubleClick(index); 
                   }}
                 />
               ) : (
